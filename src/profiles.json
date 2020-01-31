@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "firstname": "Seddik",
+    "lastname": "Benzemame",
+    "gender": "Male",
+    "description": "Senior Financial Analyst, Skyble",
+    "phone": "0540 05 50 10",
+    "address": "Ouin zraiga",
+    "image": "assets/Female/Cheryl-Carter.jpg"
+  },
+  {
+    "id": "2",
+    "firstname": "A.razak",
+    "lastname": "Ghazel",
+    "gender": "Male",
+    "description": "Math seal",
+    "phone": "0552 56 44 22",
+    "address": "Anasser",
+    "image": "assets/Female/Cheryl-Carter.jpg"
+  }
+]

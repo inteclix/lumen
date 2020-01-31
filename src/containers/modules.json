@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "name": "5AP-FR",
+    "time": "08:00",
+    "day": "Samedi",
+    "created_at": "22/09/2019",
+    "updated_at": "22/09/2019"
+  },
+  {
+    "id": "1",
+    "name": "4AP-FR",
+    "time": "10:00",
+    "day": "Samedi",
+    "created_at": "22/09/2019",
+    "updated_at": "22/09/2019"
+  }
+]
