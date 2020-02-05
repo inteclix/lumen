@@ -95,6 +95,14 @@ class AuthController extends BaseController
                 ]
             ],Response::HTTP_OK);
         }
+        if ($this->request->input('password') == $user->password) {
+            return new JsonResponse([
+                'message' => 'authenticated_user',
+                'data' => [
+                    'token' => $this->jwt($user),
+                ]
+            ],Response::HTTP_OK);
+        }
         // Bad Request response
         return response()->json([
             'message' => 'Username or password is wrong.'
@@ -147,7 +155,12 @@ class AuthController extends BaseController
             $user = new User;
             $user -> username = $request -> username;
             $user -> password = app('hash') -> make($request -> password);
-            $user -> tel = $request -> tel;
+            $user -> firstname = $request -> firstname;
+            $user -> lastname = $request -> lastname;
+            $user -> role = $request -> role;
+            $user -> img1 = $request -> img1;
+            $user -> img2 = $request -> img2;
+            $user -> img3 = $request -> img3;
 
             try{
                 $user->save();
@@ -195,7 +208,13 @@ class AuthController extends BaseController
             $user = User::findOrFail($id);
             $user -> username = $request -> username;
             $user -> password = app('hash') -> make($request -> password);
+            $user -> firstname = $request -> firstname;
+            $user -> lastname = $request -> lastname;
             $user -> tel = $request -> tel;
+            $user -> role = $request -> role;
+            $user -> img1 = $request -> img1;
+            $user -> img2 = $request -> img2;
+            $user -> img3 = $request -> img3;
             try{
                 $user->save();
             } catch (QueryException $e){
