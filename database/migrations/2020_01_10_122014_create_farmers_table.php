@@ -105,7 +105,6 @@ class CreateFarmersTable extends Migration
             $table->enum('tasswik_ishar_li_mantojk', ['yes','no']);
             $table->string('tasswik_ishar_li_mantojk_how');
             $table->enum('tasswik_ishar_li_mantojk_radat_fi3l', ['lamobalat','ihtimam','lachaya']);
-
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
