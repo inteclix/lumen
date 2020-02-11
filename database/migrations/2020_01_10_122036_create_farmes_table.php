@@ -21,7 +21,7 @@ class CreateFarmesTable extends Migration
             $table->string('dede');
             $table->enum('place_people', ['nearby', 'far']);
             $table->enum('admin', ['me', 'other']);
-            $table->enum('educ_level', ['primaire', 'seam','laicy','mihani','univ']);
+
             $table->enum('tarbiya_aranib', ['morabi', 'ma3had','taraboss','self']);
             $table->string('year_takwin');
             $table->string('lenght_takwin');
