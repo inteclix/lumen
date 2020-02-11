@@ -9,14 +9,13 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Database\QueryException;
 use Exception;
 
-use App\Meeting;
-use App\Module;
+use App\Farmer;
 
-class MeetingController extends Controller
+class FarmerController extends Controller
 {
     function get($id, Request $request){
         try{
-            $meeting = Meeting::findOrFail($id);
+            $farmer = Farmer::findOrFail($id);
         } catch (Exception $e){
             return new JsonResponse([
                 'message' => 'Id d\'ont exist',
@@ -26,39 +25,25 @@ class MeetingController extends Controller
 
         return new JsonResponse([
             'message' => 'Success get',
-            'data' => $meeting
+            'data' => $farmer
         ]);
     }
 
     function getAll(Request $request)
     {
-        $meetings = Meeting::all();
+        $farmers = Farmer::all();
         return new JsonResponse([
             'message' => 'Success get all',
-            'data' => $meetings !== NULL ? $meetings : []
+            'data' => $farmers !== NULL ? $farmers : []
         ], Response::HTTP_OK);
     }
 
     function create(Request $request)
     {
-        try {
-            $this->validate($request, [
-                'teacher_id' => 'required',
-                'module_id' => 'required',
-                'student_ids' => 'required',
-            ]);
-        } catch (ValidationException $e) {
-            return new JsonResponse([
-                'message' => 'Error fields required'
-            ], Response::HTTP_BAD_REQUEST);
-        }
-        $meeting = new Meeting;
-        $meeting->teacher_id = $request->teacher_id;
-        $meeting->module_id = $request->module_id;
+
+        $farmer = Farmer::create($request);
         try{
-            $meeting->save();
-            $meeting->students()->detach();
-            $meeting->students()->attach($request->student_ids);
+            $farmer->save();
         } catch (Exception $e){
             return new JsonResponse([
                 'message' => 'error whene saving',
@@ -68,19 +53,19 @@ class MeetingController extends Controller
 
         return new JsonResponse([
             'message' => 'Success create',
-            'data' => $meeting
+            'data' => $farmer
         ], Response::HTTP_CREATED);
     }
 
     function delete($id, Request $request){
         try{
-            Meeting::findOrFail($id);
+            Farmer::findOrFail($id);
         } catch (Exception $e){
             return new JsonResponse([
                 'message' => 'Id d\'ont exist',
             ], Response::HTTP_BAD_REQUEST);
         }
-        Meeting::destroy($id);
+        Farmer::destroy($id);
         return new JsonResponse([
             'message' => 'Deleted'
         ]);
@@ -88,29 +73,16 @@ class MeetingController extends Controller
 
     function update($id, Request $request){
         try{
-            $meeting = Meeting::findOrFail($id);
+            $farmer = Farmer::findOrFail($id);
         } catch (Exception $e){
             return new JsonResponse([
                 'message' => 'Id d\'ont exist',
             ], Response::HTTP_BAD_REQUEST);
         }
-        try {
-            $this->validate($request, [
-                'teacher_id' => 'required',
-                'module_id' => 'required',
-                'student_ids' => 'required',
-            ]);
-        } catch (ValidationException $e) {
-            return new JsonResponse([
-                'message' => 'Error fields required'
-            ], Response::HTTP_BAD_REQUEST);
-        }
-        $meeting->teacher_id = $request->teacher_id;
-        $meeting->module_id = $request->module_id;
+
+        $farmer->update($request);
         try{
-            $meeting->save();
-            $meeting->students()->detach();
-            $meeting->students()->attach($request->student_ids);
+            $farmer->save();
         } catch (QueryException $e){
             return new JsonResponse([
                 'message' => 'Sql exception'
@@ -118,7 +90,7 @@ class MeetingController extends Controller
         }
         return new JsonResponse([
             'message' => 'updated',
-            'data' => $meeting
+            'data' => $farmer
         ]);
     }
 }

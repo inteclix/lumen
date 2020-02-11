@@ -43,4 +43,31 @@ $router->group(['middleware' => 'jwt.auth'], function () use ($router) {
         'uses' => 'AuthController@update',
         'as' => 'api.auth.update'
     ]);
+
+    // farmers
+
+    $router->get('/farmers/{id}', [
+        'uses' => 'FarmerController@get',
+        'as' => 'api.farmers.get'
+    ]);
+
+    $router->get('/farmers', [
+        'uses' => 'FarmerController@getAll',
+        'as' => 'api.farmers.getAll'
+    ]);
+
+    $router->post('/farmers', [
+        'uses' => 'FarmerController@create',
+        'as' => 'api.farmers.create'
+    ]);
+
+    $router->delete('/farmers/{id}', [
+        'uses' => 'FarmerController@delete',
+        'as' => 'api.farmers.delete'
+    ]);
+
+    $router->put('/farmers/{id}', [
+        'uses' => 'FarmerController@update',
+        'as' => 'api.farmers.update'
+    ]);
 });
