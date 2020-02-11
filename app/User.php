@@ -31,23 +31,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'remember_token',
     ];
 
-    public function company()
+    public function farmers()
     {
-        return $this->belongsTo('App\Company');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
-
-    public function users()
-    {
-        return $this->hasMany('App\User');
-    }
-
-    public function cars()
-    {
-        return $this->belongsToMany('App\Car')->withTimestamps();
+        return $this->hasMany('App\Farmer');
     }
 }
